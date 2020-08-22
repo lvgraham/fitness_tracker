@@ -42,3 +42,22 @@ app.get('/stats', (req, res) => {
 
 
 
+//API ROUTES
+app.put('/api/workouts/:id' async (req,res) => {
+    db.Workout.update(
+        {_id: mongoose.Types.ObjectId(req.params.id)}, 
+        {$push: { exercises: req.body }}, 
+        {new: true}
+    ).then((data) => res.json(data))
+    .catch((err) => res.json(err));
+})
+
+app.post('/api/workouts', async ({ body }, res) => {
+    try{
+        let data = await db.Workout.create(body)
+        res.json(data);
+    }
+    catch({ message}){
+        res.json(message);
+    }
+});
