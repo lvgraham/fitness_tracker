@@ -12,6 +12,7 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+//setting static file
 app.use(express.static('public'));
 
 //connection to the database
@@ -27,58 +28,11 @@ mongoose.connect(
 	}
 );
 
-//HTML ROUTES
-app.get('/', (req, res) => {
-	res.sendFile(path.join(__dirname, './public/index.html'));
-});
+//requiring HTML & API Routes
+app.use(require("./routes/api.js"));
+app.use(require("./routes/html.js"));
 
-app.get('/exercise', (req, res) => {
-	res.sendFile(path.join(__dirname, './public/exercise.html'));
-});
-
-app.get('/stats', (req, res) => {
-	res.sendFile(path.join(__dirname, './public/stats.html'));
-});
-
-//API ROUTES
-app.get('/api/workouts', (req, res) => {
-	db.Workout.find({})
-		.then((response) => {
-			res.json(response);
-		})
-		.catch((err) => {
-			res.json(err.message);
-		});
-});
-
-app.put('/api/workouts/:id', async (req, res) => {
-	db.Workout.update(
-		{ _id: mongoose.Types.ObjectId(req.params.id) },
-		{ $push: { exercises: req.body } },
-		{ new: true }
-	)
-		.then((data) => res.json(data))
-		.catch((err) => res.json(err));
-});
-
-app.post('/api/workouts', async ({ body }, res) => {
-	try {
-		let data = await db.Workout.create(body);
-		res.json(data);
-	} catch ({ message }) {
-		res.json(message);
-	}
-});
-
-app.get('/api/workouts/range', async (req, res) => {
-	try {
-		let data = await db.Workout.find({}).sort({ day: -1 }).limit(7);
-		res.json(data);
-	} catch (error) {
-		res.json(error);
-	}
-});
-
+//initiating port
 app.listen(PORT, () => {
 	console.log(`App running on ${PORT}!`);
 });
