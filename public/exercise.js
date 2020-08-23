@@ -137,18 +137,18 @@ function clearInputs() {
   weightInput.value = "";
 }
 
-if (workoutTypeSelect) {
-  workoutTypeSelect.addEventListener("change", handleWorkoutTypeChange);
-}
-if (completeButton) {
-  completeButton.addEventListener("click", function (event) {
-    shouldNavigateAway = true;
-    handleFormSubmit(event);
-  });
-}
-if (addButton) {
-  addButton.addEventListener("click", handleFormSubmit);
-}
+
+workoutTypeSelect.addEventListener("change", handleWorkoutTypeChange);
+
+
+completeButton.addEventListener("click", function (event) {
+  houldNavigateAway = true;
+  handleFormSubmit(event);
+});
+
+
+addButton.addEventListener("click", handleFormSubmit);
+
 toast.addEventListener("animationend", handleToastAnimationEnd);
 
 document
