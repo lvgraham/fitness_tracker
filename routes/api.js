@@ -34,6 +34,7 @@ router.post('/api/workouts', async ({ body }, res) => {
 
 router.get('/api/workouts/range', async (req, res) => {
 	try {
+		//finding all the workouts and returning the last workout completed in the past 7 days.
 		let data = await Workouts.find({}).sort({ day: -1 }).limit(7);
 		res.json(data);
 	} catch (error) {

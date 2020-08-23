@@ -1,11 +1,10 @@
 const mongoose = require('mongoose');
 const express = require('express');
-const db = require('./models');
-const path = require('path');
 
 //local host port
 const PORT = process.env.PORT || 3000;
 
+//creating new instance of express.
 const app = express();
 
 //body parsing
