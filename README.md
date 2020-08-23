@@ -24,6 +24,6 @@ The user should be able to:
 
   * View multiple the combined weight of multiple exercises on the `stats` page.
 
-
+![fitness tracker](/public/images/add_workout.png)
 ![workout dashboard](/public/images/website_screenshot.png)
 
