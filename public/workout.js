@@ -22,7 +22,7 @@ async function initWorkout() {
 //function to calculate the total duration of exercises. 
 function addDuration(arr) {
   return arr.reduce((accumulator, currentValue) => {
-    return accumulator + currentvalue.duration
+    return accumulator + currentValue.duration
   }, 0)
 }
 
